@@ -48,10 +48,10 @@ sumdiv(Sheet) ->
                   divsum(
                     lists:sort(
                       fun(A, B) -> A > B end,
-                      Row)) + Acc end, 0, Sheet).
+                      Row)) + Acc
+              end, 0, Sheet).
 
 divsum(Row) ->
-  io:format("ds: ~p~n", [Row]),
   divsum(Row, 0).
 
 divsum([], S) -> S;
@@ -59,15 +59,10 @@ divsum([H|T], S) ->
   divsum(T, S + subsum(H, T)).
 
 subsum(H, T) ->
-  io:format("in: ~B, ~p~n", [H,T]),
   lists:foldl(fun(E, A) ->
                   case H rem E of
-                    0 ->
-                      io:format("t: ~B, ~B, ~B~n", [A,H,E]),
-                      A + H div E;
-                    _ ->
-                      io:format("f: ~B, ~B, ~B~n", [A,H,E]),
-                      A
+                    0 -> A + H div E;
+                    _ -> A
                   end
               end, 0, T).
 
